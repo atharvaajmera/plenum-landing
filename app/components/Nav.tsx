@@ -1,5 +1,6 @@
 import { GITHUB_URL } from "../site";
-import { Github, Download } from "./icons";
+import { Github } from "./icons";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Nav() {
   return (
@@ -8,10 +9,10 @@ export default function Nav() {
         <a className="brand" href="#top" aria-label="Plenum home">
           <img
             className="brand__mark"
-            src="/brand/logo-64.png"
+            src="/brand/logo-128.png"
             alt=""
-            width={30}
-            height={30}
+            width={32}
+            height={32}
           />
           Plenum
         </a>
@@ -27,12 +28,13 @@ export default function Nav() {
             href={GITHUB_URL}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="View Plenum on GitHub"
           >
             <Github />
             <span>GitHub</span>
           </a>
+          <ThemeToggle />
           <a className="btn btn--primary" href="#download" data-platform-href>
-            <Download />
             Download
           </a>
         </nav>

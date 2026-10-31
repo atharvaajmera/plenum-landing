@@ -1,3 +1,5 @@
+export const SITE_URL = "https://plenumonline.me";
+
 export const GITHUB_URL = "https://github.com/atharvaajmera/Plenum";
 
 export const RELEASES_URL = `${GITHUB_URL}/releases`;

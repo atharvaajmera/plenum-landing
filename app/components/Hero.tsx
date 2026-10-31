@@ -16,10 +16,6 @@ export default function Hero() {
       <div className="hero__wash" aria-hidden="true" />
       <div className="container hero__grid">
         <div className="hero__copy">
-          <p className="hero__pill">
-            <span className="hero__dot" aria-hidden="true" />
-            Free &amp; open source · <b>no account needed</b>
-          </p>
           <h1 data-reveal>
             Device to device.
             <br />
@@ -27,7 +23,7 @@ export default function Hero() {
           </h1>
           <p className="hero__sub" data-reveal>
             A free, open-source app that moves files straight between your phone
-            and computer — end-to-end encrypted, at full network speed. No cloud,
+            and computer, end-to-end encrypted, at full network speed. No cloud,
             no accounts, no size limits.
           </p>
           <div className="hero__cta" data-reveal>
@@ -42,7 +38,7 @@ export default function Hero() {
               rel="noopener noreferrer"
             >
               <Github />
-              View source
+              View source code
             </a>
           </div>
           <p className="hero__meta" data-reveal>
@@ -67,10 +63,10 @@ export default function Hero() {
               <div className="pw__bar">
                 <img
                   className="pw__mark"
-                  src="/brand/logo-64.png"
+                  src="/brand/logo-128.png"
                   alt=""
-                  width={22}
-                  height={22}
+                  width={24}
+                  height={24}
                 />
                 <span className="pw__name">Plenum</span>
                 <span className="pw__status">
