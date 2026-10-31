@@ -7,3 +7,14 @@
 .DS_Store
 *.tsbuildinfo
 next-env.d.ts
+
+# Local QA captures and tool output
+/shots/
+/.impeccable/
+
+# One-off local asset generator (points at the app source on this machine)
+/logo.mjs
+
+# Unoptimized source art; committed derivatives live in public/brand
+/public/brand/app-icon.png
+/public/brand/plenum-logo.png

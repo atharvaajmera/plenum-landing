@@ -5,8 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "qa:probe": "node scripts/audit-probe.mjs",
+    "qa:shots": "node scripts/audit-shots.mjs",
+    "qa:impact": "node scripts/verify-impact.mjs",
+    "qa:showcase": "node scripts/verify-showcase.mjs"
   },
   "dependencies": {
     "next": "15.1.6",
