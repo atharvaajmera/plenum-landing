@@ -1,51 +1,35 @@
-# Plenum — landing page
+# Plenum Landing Page
 
-The marketing site for [Plenum](https://github.com/atharvaajmera/Plenum), a free,
-open-source peer-to-peer file transfer app for Android, Windows, macOS, and Linux.
+This repository contains the official landing page for **[Plenum](https://github.com/atharvaajmera/Plenum)**.
 
-Live at **[plenumonline.me](https://plenumonline.me)**.
+**Live Website:** [plenumonline.me](https://plenumonline.me)
 
-## Stack
+---
 
-- Next.js 15 (App Router, static export)
-- React 19 + TypeScript
-- Hand-authored CSS with design tokens, dark/light themes
-- Deployed to GitHub Pages via GitHub Actions
+## About Plenum
 
-## Local development
+**Plenum** is a free, open-source file transfer tool for moving files directly between your devices with no cloud storage.
+
+- **Direct & Fast:** Transfers directly over your local network whenever possible, with an encrypted relay fallback when needed.
+- **Private & Secure:** End-to-end encrypted peer-to-peer transfers — your files are never stored on third-party servers.
+- **Simple Pairing:** Connect in seconds by scanning a QR code, sharing a link, or entering a room code.
+- **Platforms:** Available for Windows and Android (macOS and Linux coming soon).
+
+To view the main app code and releases, visit the core repository: [atharvaajmera/Plenum](https://github.com/atharvaajmera/Plenum).
+
+---
+
+## Getting Started
+
+Built with Next.js (Static Export), React, and TypeScript.
 
 ```bash
+# Install dependencies
 npm install
-npm run dev        # http://localhost:3000
+
+# Run local development server
+npm run dev
+
+# Build static production export (out/)
+npm run build
 ```
-
-## Production build
-
-```bash
-npm run build      # writes the static site to ./out
-npx serve out      # optional: preview the exported site locally
-```
-
-`next.config.mjs` sets `output: "export"`, so the build is a set of static
-files. `public/CNAME` and `.github/workflows/deploy.yml` publish `out/` to
-GitHub Pages on every push to `main`.
-
-## Content notes
-
-- `app/site.ts` — canonical URL, GitHub/releases links, platform list.
-- `app/layout.tsx` — metadata, Open Graph/Twitter cards, JSON-LD.
-- `public/screenshots/` — real app captures used in the Showcase section.
-- `PRODUCT.md` / `design.md` — product and design rationale.
-
-## QA scripts
-
-With a dev server running on port 3001 (`npm run dev -- -p 3001`):
-
-```bash
-npm run qa:probe      # layout, overflow, contrast, asset and font probes
-npm run qa:shots      # screenshots at 320/390/768/1440 into shots/
-npm run qa:showcase   # verifies both app screenshots render
-npm run qa:impact     # platform CTA detection + copy checks
-```
-
-Playwright's Chromium is required once: `npx playwright install chromium`.
