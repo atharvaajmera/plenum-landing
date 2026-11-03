@@ -5,10 +5,8 @@ import {
   Smartphone,
   Wifi,
   Globe,
-  Zap,
-  Check,
-  File,
 } from "./icons";
+import Shot from "./Shot";
 
 export default function Hero() {
   return (
@@ -17,17 +15,21 @@ export default function Hero() {
       <div className="container hero__grid">
         <div className="hero__copy">
           <h1 data-reveal>
-            Device to device.
+            Files between your devices.
             <br />
-            <em>Nothing in between.</em>
+            <em>No cloud storage.</em>
           </h1>
           <p className="hero__sub" data-reveal>
-            A free, open-source app that moves files straight between your phone
-            and computer, end-to-end encrypted, at full network speed. No cloud,
-            no accounts, no size limits.
+            Free, open-source file transfer for Windows and Android. Scan a QR
+            code, paste a Plenum link, or enter a room code. Connect directly
+            when possible, with encrypted relay fallback when needed.
           </p>
           <div className="hero__cta" data-reveal>
-            <a className="btn btn--primary btn--lg" href="#download" data-platform-href>
+            <a
+              className="btn btn--primary btn--lg"
+              href="#download"
+              data-platform-href
+            >
               <Download />
               <span data-platform-label>Download Plenum</span>
             </a>
@@ -48,93 +50,49 @@ export default function Hero() {
             </span>
             <span>
               <Wifi />
-              Found automatically on Wi-Fi
+              Direct on local network
             </span>
             <span className="hero__meta-net">
               <Globe />
-              Or paired across the internet
+              Encrypted relay fallback
             </span>
           </p>
         </div>
 
         <div className="hero__visual" data-reveal>
-          <div className="scene" aria-hidden="true">
-            <div className="pw">
-              <div className="pw__bar">
-                <img
-                  className="pw__mark"
-                  src="/brand/logo-128.png"
-                  alt=""
-                  width={24}
-                  height={24}
+          <div className="hero-scene" aria-hidden="true">
+            <figure className="frame-desktop frame-desktop--hero">
+              <div className="frame-desktop__bar">
+                <span className="frame-desktop__dot" />
+                <span className="frame-desktop__dot" />
+                <span className="frame-desktop__dot" />
+                <span className="frame-desktop__title">Plenum - Desktop</span>
+              </div>
+              <div className="frame-desktop__shot">
+                <Shot
+                  priority
+                  darkSrc="/screenshots/desktop-dark.png"
+                  lightSrc="/screenshots/desktop-light.png"
+                  alt="Plenum desktop app home screen"
+                  label="Plenum on Desktop"
                 />
-                <span className="pw__name">Plenum</span>
-                <span className="pw__status">
-                  <span className="pw__status-dot" />
-                  Connected
-                </span>
               </div>
-              <div className="pw__body">
-                <p className="pw__peer">
-                  <b>Pixel&nbsp;8</b> to <b>This&nbsp;Mac</b> · direct link
-                </p>
+            </figure>
 
-                <div className="pw__file pw__file--active">
-                  <span className="pw__file-icon">
-                    <File />
-                  </span>
-                  <div className="pw__file-main">
-                    <div className="pw__file-row">
-                      <span className="pw__file-name">design-assets.zip</span>
-                      <span className="pw__file-pct">72%</span>
-                    </div>
-                    <div className="pw__track">
-                      <span className="pw__fill" />
-                    </div>
-                    <div className="pw__file-meta">
-                      <span>178 of 248 MB</span>
-                      <span className="pw__speed">
-                        <Zap />
-                        18.4 MB/s
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pw__file pw__file--done">
-                  <span className="pw__file-icon pw__file-icon--done">
-                    <Check />
-                  </span>
-                  <div className="pw__file-main">
-                    <div className="pw__file-row">
-                      <span className="pw__file-name">vacation-video.mp4</span>
-                      <span className="pw__file-done">Sent</span>
-                    </div>
-                    <div className="pw__file-meta">
-                      <span>1.2 GB · encrypted end to end</span>
-                    </div>
-                  </div>
-                </div>
+            <figure className="frame-phone frame-phone--hero">
+              <span className="frame-phone__speaker" />
+              <span className="frame-phone__camera" />
+              <div className="frame-phone__shot">
+                <span className="frame-phone__glare" />
+                <Shot
+                  priority
+                  darkSrc="/screenshots/mobile-dark-send.png"
+                  lightSrc="/screenshots/mobile-light-send.png"
+                  alt="Plenum Android app showing file selection to send"
+                  label="Plenum on Android"
+                />
               </div>
-            </div>
-
-            <div className="ph">
-              <span className="ph__notch" />
-              <div className="ph__screen">
-                <div className="ph__radar">
-                  <span className="ph__ripple" />
-                  <span className="ph__ripple ph__ripple--b" />
-                  <span className="ph__core">
-                    <Smartphone />
-                  </span>
-                </div>
-                <span className="ph__label">Sending</span>
-                <div className="ph__track">
-                  <span className="ph__fill" />
-                </div>
-                <span className="ph__pct">72%</span>
-              </div>
-            </div>
+            </figure>
           </div>
         </div>
       </div>

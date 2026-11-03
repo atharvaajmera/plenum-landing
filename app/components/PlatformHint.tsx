@@ -2,23 +2,15 @@
 
 import { useEffect } from "react";
 
-/* Progressive enhancement: detects the visitor's platform once, then upgrades
-   the download CTAs — anchor hrefs point at the matching card in #download,
-   the hero button names the platform, and that card gets a "Your platform"
-   badge. Without JS nothing breaks: one generic Download button, four equal
-   cards, releases link still in the footer. iOS is unsupported today, so an
-   iPhone/iPad keeps the generic floor. */
+type PlatformId = "windows" | "android" | "macos" | "linux";
 
-const NAMES = {
-  windows: "Windows",
-  macos: "macOS",
-  linux: "Linux",
-  android: "Android",
-} as const;
+interface DetectionResult {
+  id: PlatformId;
+  available: boolean;
+  name: string;
+}
 
-type PlatformId = keyof typeof NAMES;
-
-function detect(): PlatformId | null {
+function detect(): DetectionResult | null {
   if (typeof window === "undefined" || typeof navigator === "undefined") return null;
 
   const ua = (navigator.userAgent || "").toLowerCase();
@@ -47,41 +39,22 @@ function detect(): PlatformId | null {
     uaDataPlatform === "android" ||
     (uaData?.mobile && !ua.includes("windows") && !ua.includes("macintosh"))
   ) {
-    return "android";
+    return { id: "android", available: true, name: "Android" };
   }
 
-  // 3. Mobile screen / DevTools mobile emulation mode
-  // When viewed on mobile screen width (<= 768px), recommend Android mobile app
-  const isMobileScreen =
-    window.innerWidth <= 768 ||
-    (window.matchMedia && window.matchMedia("(max-width: 768px)").matches);
-
-  if (isMobileScreen) {
-    return "android";
-  }
-
-  // 4. Desktop OS detection (macOS, Windows, Linux)
+  // 3. Desktop OS detection
+  // Check macOS (coming soon)
   if (
     ua.includes("macintosh") ||
     ua.includes("mac os x") ||
     ua.includes("darwin") ||
     uaDataPlatform === "macos" ||
-    platform.includes("mac")
+    (platform.includes("mac") && !platform.includes("win"))
   ) {
-    return "macos";
+    return { id: "macos", available: false, name: "macOS" };
   }
 
-  if (
-    ua.includes("windows") ||
-    ua.includes("win64") ||
-    ua.includes("win32") ||
-    ua.includes("win9x") ||
-    uaDataPlatform === "windows" ||
-    platform.startsWith("win")
-  ) {
-    return "windows";
-  }
-
+  // Check Linux (coming soon)
   if (
     ua.includes("linux") ||
     ua.includes("x11") ||
@@ -90,16 +63,28 @@ function detect(): PlatformId | null {
     ua.includes("fedora") ||
     uaDataPlatform === "linux"
   ) {
-    return "linux";
+    return { id: "linux", available: false, name: "Linux" };
   }
 
-  return "windows";
+  // Check Windows (available)
+  if (
+    ua.includes("windows") ||
+    ua.includes("win64") ||
+    ua.includes("win32") ||
+    ua.includes("win9x") ||
+    uaDataPlatform === "windows"
+  ) {
+    return { id: "windows", available: true, name: "Windows" };
+  }
+
+  // 4. Unknown OS: return null (generic floor, do not guess Windows)
+  return null;
 }
 
 export default function PlatformHint() {
   useEffect(() => {
     function update() {
-      const id = detect();
+      const res = detect();
 
       // Clean up any stale recommended badges/classes
       document.querySelectorAll(".platform.is-recommended").forEach((el) => {
@@ -109,35 +94,41 @@ export default function PlatformHint() {
         badge.remove();
       });
 
-      if (!id) {
-        document
-          .querySelectorAll<HTMLAnchorElement>("[data-platform-href]")
-          .forEach((a) => {
-            a.setAttribute("href", "#download");
-          });
-        const label = document.querySelector("[data-platform-label]");
+      const label = document.querySelector("[data-platform-label]");
+      const anchors = document.querySelectorAll<HTMLAnchorElement>("[data-platform-href]");
+
+      // If no supported platform detected or unknown/iOS
+      if (!res) {
+        anchors.forEach((a) => a.setAttribute("href", "#download"));
         if (label) label.textContent = "Download Plenum";
         return;
       }
 
-      // Update hero CTAs
-      document
-        .querySelectorAll<HTMLAnchorElement>("[data-platform-href]")
-        .forEach((a) => {
-          a.setAttribute("href", `#download-${id}`);
-        });
+      // If platform is available (Windows or Android)
+      if (res.available) {
+        anchors.forEach((a) => a.setAttribute("href", `#download-${res.id}`));
+        if (label) label.textContent = `Download for ${res.name}`;
 
-      const label = document.querySelector("[data-platform-label]");
-      if (label) label.textContent = `Download for ${NAMES[id]}`;
+        const card = document.getElementById(`download-${res.id}`);
+        if (card) {
+          card.classList.add("is-recommended");
+          const badge = document.createElement("span");
+          badge.className = "platform__badge";
+          badge.textContent = "Your platform";
+          card.appendChild(badge);
+        }
+      } else {
+        // macOS / Linux: Coming soon -> never say "Download for macOS/Linux"
+        anchors.forEach((a) => a.setAttribute("href", `#download-${res.id}`));
+        if (label) label.textContent = "Download Plenum";
 
-      // Mark the detected card as recommended
-      const card = document.getElementById(`download-${id}`);
-      if (card) {
-        card.classList.add("is-recommended");
-        const badge = document.createElement("span");
-        badge.className = "platform__badge";
-        badge.textContent = "Your platform";
-        card.appendChild(badge);
+        const card = document.getElementById(`download-${res.id}`);
+        if (card) {
+          const badge = document.createElement("span");
+          badge.className = "platform__badge platform__badge--neutral";
+          badge.textContent = "Your platform (Coming soon)";
+          card.appendChild(badge);
+        }
       }
     }
 

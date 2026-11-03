@@ -1,32 +1,64 @@
-import { Wifi, Smartphone, Monitor, File, Globe, Lock } from "./icons";
+import {
+  Wifi,
+  Smartphone,
+  Monitor,
+  File,
+  Globe,
+  Lock,
+  ArrowRight,
+  Shield,
+  QrCode,
+} from "./icons";
+
+const STEPS = [
+  {
+    num: "1",
+    title: "Get ready to receive.",
+    text: "Start receiving to display the QR code and room code.",
+    icon: QrCode,
+  },
+  {
+    num: "2",
+    title: "Choose files and connect.",
+    text: "Scan the receiver's QR code on Android, paste a Plenum link, or enter the room code.",
+    icon: File,
+  },
+  {
+    num: "3",
+    title: "Approve and transfer.",
+    text: "Confirm on the receiving device when prompted and follow the transfer's progress.",
+    icon: Shield,
+  },
+];
 
 export default function HowItMoves() {
   return (
     <section className="section" id="how">
       <div className="container">
-        <div className="flow__head">
+        <div className="flow__head" data-reveal>
           <span className="eyebrow">
             <Wifi />
             How it works
           </span>
-          <h2>A file leaves one device and arrives at the other. That&apos;s the whole trip.</h2>
+          <h2>One transfer flow. Plenum picks the path.</h2>
           <p className="section-lead">
-            Two devices running Plenum connect straight to each other — on your
-            own network, or across the internet with a short code. No account,
-            no upload step, and nothing of yours is ever stored on a server.
+            Start receiving on one device, then choose your files on the other.
+            Connect using a QR code, Plenum link, or room code. Plenum handles
+            the connection automatically; approve the transfer when prompted.
           </p>
         </div>
 
-        <div className="stage" data-reveal>
+        {/* Visual overview illustration */}
+        <div className="stage" data-reveal aria-label="Transfer overview">
           <div className="stage__devices">
             <div className="node node--phone">
               <span className="node__screen">
                 <Smartphone />
               </span>
-              Your phone
+              Sender
             </div>
 
-            <div className="wire">
+            <div className="wire" aria-hidden="true">
               <span className="wire__packet">
                 <File />
               </span>
@@ -37,55 +69,64 @@ export default function HowItMoves() {
                 <Monitor />
               </span>
               <span className="node__base" aria-hidden="true" />
-              Your laptop
+              Receiver
             </div>
           </div>
         </div>
 
-        <p className="modes__title">Two ways to connect</p>
-        <div className="modes" data-reveal>
-          <div className="mode-panel mode-panel--lan">
-            <span className="mode-panel__icon" aria-hidden="true">
-              <Wifi />
-            </span>
-            <h3>On the same network</h3>
-            <p>
-              Your devices announce themselves and pair automatically — no
-              account, no setup. The file moves directly between them, and no
-              server is ever in the path.
-            </p>
-            <ul className="mode-panel__meta">
-              <li>Auto-discovery</li>
-              <li>Direct connection</li>
-              <li>Full network speed</li>
-            </ul>
-          </div>
-
-          <div className="mode-panel mode-panel--net">
-            <span className="mode-panel__icon" aria-hidden="true">
-              <Globe />
-            </span>
-            <h3>Across the internet</h3>
-            <p>
-              One device shows a short code; the other types it in. A relay
-              introduces the two, then gets out of the way — the connection is
-              direct whenever the network allows. If a strict firewall blocks
-              it, traffic falls back to an encrypted relay that still can&apos;t
-              read your files.
-            </p>
-            <ul className="mode-panel__meta">
-              <li>Short room code</li>
-              <li>Direct when possible</li>
-              <li>Encrypted relay fallback</li>
-            </ul>
-          </div>
+        {/* Ordered sequence — Primary explanation */}
+        <div className="flow-steps" data-reveal-stagger>
+          {STEPS.map((step) => {
+            const Icon = step.icon;
+            return (
+              <div className="flow-step" key={step.num}>
+                <div className="flow-step__badge" aria-hidden="true">
+                  <span className="flow-step__num">{step.num}</span>
+                  <Icon className="flow-step__icon" />
+                </div>
+                <h3 className="flow-step__title">{step.title}</h3>
+                <p className="flow-step__text">{step.text}</p>
+              </div>
+            );
+          })}
         </div>
 
-        <p className="modes__note" data-reveal>
-          <Lock />
-          Either way, every transfer gets a fresh encryption key and travels
-          end to end encrypted — with an optional PIN to lock down pairing.
-        </p>
+        {/* Subordinate routing explanation */}
+        <div className="flow-routing" data-reveal>
+          <div className="flow-routing__main">
+            <p className="flow-routing__copy">
+              Plenum can use a direct local connection, a direct internet
+              connection, or an encrypted relay when needed. You don&apos;t have
+              to select a network mode.
+            </p>
+            <div
+              className="flow-routing__routes"
+              aria-label="Available connection routes"
+            >
+              <span className="route-pill">
+                <Wifi />
+                Local
+              </span>
+              <span className="route-pill">
+                <Globe />
+                Direct internet
+              </span>
+              <span className="route-pill">
+                <Lock />
+                Encrypted relay
+              </span>
+            </div>
+          </div>
+          <div className="flow-routing__link">
+            <a href="#faq">
+              Have questions about how network paths, relays, or QR payloads work?
+              <span>
+                Read the FAQ
+                <ArrowRight />
+              </span>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );

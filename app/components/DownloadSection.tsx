@@ -1,4 +1,4 @@
-import { PLATFORMS } from "../site";
+import { PLATFORMS, Platform } from "../site";
 import { Windows, Apple, Linux, Android, ArrowRight } from "./icons";
 
 const ICONS = {
@@ -15,34 +15,58 @@ export default function DownloadSection() {
         <div className="download__head" data-reveal>
           <h2>Get Plenum on your devices.</h2>
           <p>
-            Install it on the two devices you move files between. It&apos;s free,
-            open source, and takes about a minute. iPhone or iPad? Not yet —
-            Plenum is built for Android, Windows, macOS, and Linux.
+            Available now for Windows and Android. macOS and Linux are coming
+            soon. iPhone and iPad are not currently supported.
           </p>
         </div>
 
         <div className="platforms" data-reveal-stagger>
-          {PLATFORMS.map((p) => {
+          {PLATFORMS.map((p: Platform) => {
             const Icon = ICONS[p.id];
+            const isAvailable = p.status === "available";
+
+            if (isAvailable && p.href) {
+              return (
+                <a
+                  className="platform platform--available"
+                  key={p.id}
+                  id={`download-${p.id}`}
+                  href={p.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="platform__icon" aria-hidden="true">
+                    <Icon />
+                  </span>
+                  <span className="platform__name">{p.name}</span>
+                  <span className="platform__meta">{p.meta}</span>
+                  <span className="platform__cta">
+                    Download
+                    <ArrowRight />
+                  </span>
+                </a>
+              );
+            }
+
             return (
-              <a className="platform" key={p.id} id={`download-${p.id}`} href={p.href}>
+              <div
+                className="platform platform--coming-soon"
+                key={p.id}
+                id={`download-${p.id}`}
+              >
                 <span className="platform__icon" aria-hidden="true">
                   <Icon />
                 </span>
                 <span className="platform__name">{p.name}</span>
                 <span className="platform__meta">{p.meta}</span>
-                <span className="platform__cta">
-                  Download
-                  <ArrowRight />
-                </span>
-              </a>
+                <span className="platform__status-badge">Coming soon</span>
+              </div>
             );
           })}
         </div>
 
         <p className="download__note">
-          Links point to the project&apos;s GitHub releases. Builds for each
-          platform land there as they ship.
+          Official downloads for Windows and Android are published on GitHub Releases.
         </p>
       </div>
     </section>

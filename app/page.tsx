@@ -2,6 +2,7 @@ import Nav from "./components/Nav";
 import Hero from "./components/Hero";
 import HowItMoves from "./components/HowItMoves";
 import Privacy from "./components/Privacy";
+import PrivacyFaq from "./components/PrivacyFaq";
 import Showcase from "./components/Showcase";
 import OpenSource from "./components/OpenSource";
 import DownloadSection from "./components/DownloadSection";
@@ -17,6 +18,7 @@ export default function Home() {
         <Hero />
         <HowItMoves />
         <Privacy />
+        <PrivacyFaq />
         <Showcase />
         <OpenSource />
         <DownloadSection />

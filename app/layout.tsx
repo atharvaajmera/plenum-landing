@@ -19,9 +19,9 @@ const sora = Sora({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Plenum - Device to device. Nothing in between.",
+  title: "Plenum - Files between your devices. No cloud storage.",
   description:
-    "Plenum moves files directly between your phone and computer — full network speed, fully private, no cloud middleman. Free and open source for Android, Windows, macOS, and Linux.",
+    "Free, open-source file transfer for Windows and Android. Connect directly when possible, with encrypted relay fallback when needed. No cloud file storage, no accounts.",
   keywords: [
     "file transfer",
     "peer to peer",
@@ -29,8 +29,10 @@ export const metadata: Metadata = {
     "private file sharing",
     "send files",
     "Android",
-    "desktop",
+    "Windows",
     "open source",
+    "no cloud",
+    "encrypted transfer",
   ],
   authors: [{ name: "Plenum" }],
   creator: "Plenum",
@@ -41,24 +43,24 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: SITE_URL,
-    title: "Plenum — Device to device. Nothing in between.",
+    title: "Plenum — Files between your devices. No cloud storage.",
     description:
-      "Files travel directly between your devices — full speed, fully private, no cloud middleman.",
+      "Free, open-source file transfer for Windows and Android. Direct when possible, encrypted relay fallback. No cloud storage.",
     siteName: "Plenum",
     images: [
       {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "Plenum — Device to device. Nothing in between.",
+        alt: "Plenum — Files between your devices. No cloud storage.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Plenum — Device to device. Nothing in between.",
+    title: "Plenum — Files between your devices. No cloud storage.",
     description:
-      "Files travel directly between your devices — full speed, fully private, no cloud middleman.",
+      "Free, open-source file transfer for Windows and Android. Direct when possible, encrypted relay fallback. No cloud storage.",
     images: ["/og.png"],
   },
   robots: {
@@ -77,12 +79,12 @@ const jsonLd = {
   "@type": "SoftwareApplication",
   name: "Plenum",
   applicationCategory: "UtilitiesApplication",
-  operatingSystem: "Android, Windows, macOS, Linux",
+  operatingSystem: "Windows, Android",
   url: SITE_URL,
   downloadUrl: RELEASES_URL,
   codeRepository: GITHUB_URL,
   description:
-    "Free, open-source peer-to-peer file transfer between Android and desktop. Files move directly between devices, end-to-end encrypted, with no cloud middleman.",
+    "Free, open-source peer-to-peer file transfer for Windows and Android. Files move between devices without cloud storage, end-to-end encrypted.",
   offers: {
     "@type": "Offer",
     price: "0",

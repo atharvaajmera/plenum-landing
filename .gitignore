@@ -5,6 +5,8 @@
 *.pem
 .env*.local
 .DS_Store
+desktop.ini
+Thumbs.db
 *.tsbuildinfo
 next-env.d.ts
 

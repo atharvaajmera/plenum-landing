@@ -9,9 +9,9 @@ export default function OpenSource() {
           <div>
             <h2>Don&apos;t take our word for it. Read the code.</h2>
             <p>
-              Every line of Plenum is public. You can audit exactly how a file
-              moves, confirm nothing is sent anywhere it shouldn&apos;t be, or
-              build it yourself from source.
+              Every line of Plenum is public. You can audit how files move,
+              inspect the network protocols, or build the app yourself from
+              source.
             </p>
             <div className="oss__facts">
               <span className="oss__fact">

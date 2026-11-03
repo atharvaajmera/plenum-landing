@@ -27,6 +27,7 @@ export default function Showcase() {
             </div>
             <div className="frame-desktop__shot">
               <Shot
+                priority
                 darkSrc="/screenshots/desktop-dark.png"
                 lightSrc="/screenshots/desktop-light.png"
                 alt="Plenum desktop app showing the send and receive home screen"
@@ -42,6 +43,7 @@ export default function Showcase() {
             <div className="frame-phone__shot">
               <span className="frame-phone__glare" aria-hidden="true" />
               <Shot
+                priority
                 darkSrc="/screenshots/mobile-dark.png"
                 lightSrc="/screenshots/mobile-light.png"
                 alt="Plenum Android app showing the transfer radar"

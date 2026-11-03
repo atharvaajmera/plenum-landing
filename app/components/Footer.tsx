@@ -16,7 +16,7 @@ export default function Footer() {
               />
               Plenum
             </a>
-            <p>Device to device. Nothing in between.</p>
+            <p>Files between your devices. No cloud storage.</p>
           </div>
 
           <div className="footer__cols">
@@ -24,6 +24,7 @@ export default function Footer() {
               <h3>Product</h3>
               <a href="#how">How it works</a>
               <a href="#privacy">Privacy</a>
+              <a href="#faq">FAQ</a>
               <a href="#app">The app</a>
               <a href={RELEASES_URL}>Download</a>
             </div>
@@ -33,9 +34,9 @@ export default function Footer() {
                 GitHub
               </a>
               <a
-                href={`${GITHUB_URL}/releases`}
-                target="_blank"
-                rel="noopener noreferrer"
+                 href={`${GITHUB_URL}/releases`}
+                 target="_blank"
+                 rel="noopener noreferrer"
               >
                 Releases
               </a>

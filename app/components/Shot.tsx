@@ -11,39 +11,34 @@ interface SingleShotProps {
   alt: string;
   label: string;
   theme: "dark" | "light";
+  priority?: boolean;
 }
 
-function SingleShot({ src, alt, label, theme }: SingleShotProps) {
-  const [loaded, setLoaded] = useState(false);
+function SingleShot({ src, alt, label, theme, priority }: SingleShotProps) {
   const [failed, setFailed] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
-    setLoaded(false);
     setFailed(false);
-    if (imgRef.current?.complete) {
-      setFailed(imgRef.current.naturalWidth === 0);
-      setLoaded(imgRef.current.naturalWidth > 0);
+    if (imgRef.current?.complete && imgRef.current.naturalWidth === 0) {
+      setFailed(true);
     }
   }, [src]);
 
   return (
     <div className={`shot-view shot-view--${theme}`}>
-      {!failed && (
+      {!failed && src ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
           ref={imgRef}
           src={src}
           alt={alt}
-          loading="lazy"
-          decoding="async"
-          onLoad={() => setLoaded(true)}
+          loading={priority ? "eager" : "lazy"}
+          decoding={priority ? "sync" : "async"}
           onError={() => setFailed(true)}
-          style={{ opacity: loaded ? 1 : 0, transition: "opacity .3s ease" }}
         />
-      )}
-      {(!loaded || failed) && (
-        <div className="shot-placeholder" aria-hidden={!failed}>
+      ) : (
+        <div className="shot-placeholder" role="img" aria-label={label}>
           <ImagePlus />
           <b>{label}</b>
         </div>
@@ -60,6 +55,7 @@ export default function Shot({
   label,
   darkAlt,
   lightAlt,
+  priority,
 }: {
   src?: string;
   darkSrc?: string;
@@ -68,6 +64,7 @@ export default function Shot({
   label: string;
   darkAlt?: string;
   lightAlt?: string;
+  priority?: boolean;
 }) {
   const effectiveDark = darkSrc || src || "";
   const effectiveLight = lightSrc || src || "";
@@ -79,6 +76,7 @@ export default function Shot({
         alt={alt}
         label={label}
         theme="dark"
+        priority={priority}
       />
     );
   }
@@ -90,12 +88,14 @@ export default function Shot({
         alt={darkAlt || `${alt} (Dark mode)`}
         label={`${label} (Dark)`}
         theme="dark"
+        priority={priority}
       />
       <SingleShot
         src={effectiveLight}
         alt={lightAlt || `${alt} (Light mode)`}
         label={`${label} (Light)`}
         theme="light"
+        priority={priority}
       />
     </div>
   );
