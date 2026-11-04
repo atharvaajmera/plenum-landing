@@ -364,6 +364,7 @@ a {
 /* FAQ Light Mode */
 [data-theme="light"] .faq {
   background: #f8fafc;
+  border-top: 1.5px solid #cbd5e1;
 }
 [data-theme="light"] .faq__item {
   background: #ffffff;
@@ -1651,7 +1652,7 @@ p {
 /* ---------- Connection & Privacy FAQ ---------- */
 .faq {
   background: var(--bg-canvas);
-  border-bottom: 1px solid var(--hairline);
+  border-top: 1px solid var(--hairline);
 }
 .faq__head {
   max-width: var(--container-narrow);

@@ -24,9 +24,9 @@ export default function Footer() {
               <h3>Product</h3>
               <a href="#how">How it works</a>
               <a href="#privacy">Privacy</a>
-              <a href="#faq">FAQ</a>
               <a href="#app">The app</a>
               <a href={RELEASES_URL}>Download</a>
+              <a href="#faq">FAQ</a>
             </div>
             <div className="footer__col">
               <h3>Project</h3>
